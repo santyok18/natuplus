@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 27-05-2025 a las 23:14:53
+-- Tiempo de generación: 27-05-2025 a las 23:58:17
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 8.1.6
 
@@ -130,14 +130,21 @@ CREATE TABLE `usuario` (
   `id_usuario` int(11) NOT NULL,
   `nombre` varchar(250) NOT NULL,
   `email` varchar(250) NOT NULL,
-  `contraseña` varchar(400) NOT NULL,
+  `contrasena` varchar(400) NOT NULL,
   `tipo-usuario` int(11) NOT NULL,
-  `apelido` varchar(250) NOT NULL,
+  `apellido` varchar(250) NOT NULL,
   `direccion` varchar(250) NOT NULL,
   `cp` varchar(50) NOT NULL,
   `telefono` varchar(50) NOT NULL,
   `dni` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `usuario`
+--
+
+INSERT INTO `usuario` (`id_usuario`, `nombre`, `email`, `contrasena`, `tipo-usuario`, `apellido`, `direccion`, `cp`, `telefono`, `dni`) VALUES
+(1, 'prueba', 'prueba@email.com', '1234', 1, 'primer', 'calle prueba 1223', '1884', '21314232534', '32456789');
 
 --
 -- Índices para tablas volcadas
@@ -232,7 +239,7 @@ ALTER TABLE `proveedor`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Restricciones para tablas volcadas
