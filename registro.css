@@ -1,0 +1,86 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #e0f2fe; /* Celeste muy claro */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.login-container {
+  background-color: #bae6fd; /* Celeste claro */
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+}
+
+.login-container h2 {
+  color: #0c4a6e; /* Azul oscuro */
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  margin: 10px 0 5px;
+  color: #075985; /* Azul intermedio */
+}
+
+input {
+  padding: 10px;
+  border: 1px solid #7dd3fc;
+  border-radius: 8px;
+  background-color: #f0f9ff;
+  transition: border 0.3s;
+}
+
+input:focus {
+  border-color: #38bdf8;
+  outline: none;
+}
+
+button {
+  margin-top: 20px;
+  padding: 12px;
+  background-color: #38bdf8; /* Azul celeste */
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #0ea5e9;
+}
+.registro-link {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.registro-link p {
+  color: #075985;
+  margin: 0;
+}
+
+.registro-link a {
+  display: inline-block;
+  margin-top: 5px;
+  color: #0ea5e9;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s;
+}
+
+.registro-link a:hover {
+  color: #0284c7;
+}
