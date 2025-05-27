@@ -12,7 +12,7 @@ body {
 }
 
 header {
-    background: url('img/atras.jpg');
+    background: url('../img/atras.jpg');
     background-size: cover;
     background-position: center;
     height: 300px;

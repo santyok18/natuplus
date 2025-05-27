@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 27-05-2025 a las 22:24:52
--- Versión del servidor: 10.4.28-MariaDB
--- Versión de PHP: 8.0.28
+-- Tiempo de generación: 27-05-2025 a las 23:14:53
+-- Versión del servidor: 10.4.24-MariaDB
+-- Versión de PHP: 8.1.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -34,7 +34,7 @@ CREATE TABLE `empleado` (
   `horario_entrada` varchar(50) NOT NULL,
   `horario_salida` varchar(50) NOT NULL,
   `obra_social` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -44,11 +44,11 @@ CREATE TABLE `empleado` (
 
 CREATE TABLE `facturacion` (
   `id_facturacion` int(11) NOT NULL,
-  `fecha` date NOT NULL,
+  `fecha` timestamp NOT NULL DEFAULT current_timestamp(),
   `descripcion` varchar(100) NOT NULL,
-  `id_usuario` int(11) NOT NULL,
-  `num_pedido` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `fk_id_usuario` int(11) NOT NULL,
+  `fk_id_pedido` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -62,20 +62,20 @@ CREATE TABLE `materia_prima` (
   `fecha_ingreso` date NOT NULL,
   `stock` int(11) NOT NULL,
   `cant_minima` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `pedios`
+-- Estructura de tabla para la tabla `pedidos`
 --
 
-CREATE TABLE `pedios` (
-  `nu_pedido` int(11) NOT NULL,
-  `estado_producto` varchar(50) NOT NULL,
+CREATE TABLE `pedidos` (
+  `id_pedido` int(11) NOT NULL,
   `cant_pedido` int(11) NOT NULL,
-  `fecha_pedido` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `fecha_pedido` timestamp NOT NULL DEFAULT current_timestamp(),
+  `fk_id_producto` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -85,11 +85,11 @@ CREATE TABLE `pedios` (
 
 CREATE TABLE `producto` (
   `id_producto` int(11) NOT NULL,
-  `cant_producto` int(11) NOT NULL,
+  `estado` int(11) NOT NULL,
   `cod_producto` varchar(20) NOT NULL,
   `stock_minimo` int(11) NOT NULL,
   `stock` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -104,7 +104,7 @@ CREATE TABLE `proveedor` (
   `cantidad` int(20) NOT NULL,
   `apellido` varchar(50) NOT NULL,
   `nombre` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -118,7 +118,7 @@ CREATE TABLE `remito` (
   `cant_producto` int(11) NOT NULL,
   `estado_remito` varchar(50) NOT NULL,
   `num_pedido` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -128,16 +128,16 @@ CREATE TABLE `remito` (
 
 CREATE TABLE `usuario` (
   `id_usuario` int(11) NOT NULL,
-  `nombre` varchar(11) NOT NULL,
-  `email` varchar(11) NOT NULL,
-  `contraseña` varchar(11) NOT NULL,
+  `nombre` varchar(250) NOT NULL,
+  `email` varchar(250) NOT NULL,
+  `contraseña` varchar(400) NOT NULL,
   `tipo-usuario` int(11) NOT NULL,
-  `apelido` varchar(50) NOT NULL,
-  `direccion` varchar(50) NOT NULL,
+  `apelido` varchar(250) NOT NULL,
+  `direccion` varchar(250) NOT NULL,
   `cp` varchar(50) NOT NULL,
   `telefono` varchar(50) NOT NULL,
   `dni` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Índices para tablas volcadas
@@ -153,13 +153,28 @@ ALTER TABLE `empleado`
 -- Indices de la tabla `facturacion`
 --
 ALTER TABLE `facturacion`
-  ADD PRIMARY KEY (`id_facturacion`);
+  ADD PRIMARY KEY (`id_facturacion`),
+  ADD KEY `fk_id_usuario` (`fk_id_usuario`,`fk_id_pedido`),
+  ADD KEY `fk_id_pedido` (`fk_id_pedido`);
 
 --
 -- Indices de la tabla `materia_prima`
 --
 ALTER TABLE `materia_prima`
   ADD PRIMARY KEY (`id_materia prima`);
+
+--
+-- Indices de la tabla `pedidos`
+--
+ALTER TABLE `pedidos`
+  ADD PRIMARY KEY (`id_pedido`),
+  ADD KEY `fk_id_producto` (`fk_id_producto`);
+
+--
+-- Indices de la tabla `producto`
+--
+ALTER TABLE `producto`
+  ADD PRIMARY KEY (`id_producto`);
 
 --
 -- Indices de la tabla `proveedor`
@@ -196,6 +211,18 @@ ALTER TABLE `materia_prima`
   MODIFY `id_materia prima` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT de la tabla `pedidos`
+--
+ALTER TABLE `pedidos`
+  MODIFY `id_pedido` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `producto`
+--
+ALTER TABLE `producto`
+  MODIFY `id_producto` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de la tabla `proveedor`
 --
 ALTER TABLE `proveedor`
@@ -206,6 +233,23 @@ ALTER TABLE `proveedor`
 --
 ALTER TABLE `usuario`
   MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- Restricciones para tablas volcadas
+--
+
+--
+-- Filtros para la tabla `facturacion`
+--
+ALTER TABLE `facturacion`
+  ADD CONSTRAINT `facturacion_ibfk_1` FOREIGN KEY (`fk_id_pedido`) REFERENCES `pedidos` (`id_pedido`),
+  ADD CONSTRAINT `facturacion_ibfk_2` FOREIGN KEY (`fk_id_usuario`) REFERENCES `usuario` (`id_usuario`);
+
+--
+-- Filtros para la tabla `pedidos`
+--
+ALTER TABLE `pedidos`
+  ADD CONSTRAINT `pedidos_ibfk_1` FOREIGN KEY (`fk_id_producto`) REFERENCES `producto` (`id_producto`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
