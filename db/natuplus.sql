@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 27-05-2025 a las 23:58:17
+-- Tiempo de generación: 11-06-2025 a las 00:43:39
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 8.1.6
 
@@ -131,7 +131,7 @@ CREATE TABLE `usuario` (
   `nombre` varchar(250) NOT NULL,
   `email` varchar(250) NOT NULL,
   `contrasena` varchar(400) NOT NULL,
-  `tipo-usuario` int(11) NOT NULL,
+  `tipo_usuario` int(11) NOT NULL,
   `apellido` varchar(250) NOT NULL,
   `direccion` varchar(250) NOT NULL,
   `cp` varchar(50) NOT NULL,
@@ -143,8 +143,9 @@ CREATE TABLE `usuario` (
 -- Volcado de datos para la tabla `usuario`
 --
 
-INSERT INTO `usuario` (`id_usuario`, `nombre`, `email`, `contrasena`, `tipo-usuario`, `apellido`, `direccion`, `cp`, `telefono`, `dni`) VALUES
-(1, 'prueba', 'prueba@email.com', '1234', 1, 'primer', 'calle prueba 1223', '1884', '21314232534', '32456789');
+INSERT INTO `usuario` (`id_usuario`, `nombre`, `email`, `contrasena`, `tipo_usuario`, `apellido`, `direccion`, `cp`, `telefono`, `dni`) VALUES
+(1, 'prueba', 'prueba@email.com', '1234', 1, 'primer', 'calle prueba 1223', '1884', '21314232534', '32456789'),
+(2, 'prueba', 'prueba2@email.com', '1234', 1, 'segunda', 'calle falsa 122223', '23112', '32423', '4234222');
 
 --
 -- Índices para tablas volcadas
@@ -239,7 +240,7 @@ ALTER TABLE `proveedor`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Restricciones para tablas volcadas
