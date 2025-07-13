@@ -32,7 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Reiniciar el contador de errores si inicia sesión correctamente
             $_SESSION['contError'] = 0;
 
-            header("Location: ../templates/paginaPrincipal.html");
+            header("Location: ../src/paginaPrincipal.php");
             exit();
         } else {
             // Incrementar el contador de errores

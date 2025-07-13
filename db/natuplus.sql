@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 11-06-2025 a las 00:43:39
+-- Tiempo de generación: 14-07-2025 a las 00:16:25
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 8.1.6
 
@@ -50,6 +50,14 @@ CREATE TABLE `facturacion` (
   `fk_id_pedido` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Volcado de datos para la tabla `facturacion`
+--
+
+INSERT INTO `facturacion` (`id_facturacion`, `fecha`, `descripcion`, `fk_id_usuario`, `fk_id_pedido`) VALUES
+(1, '2025-07-13 22:14:28', 'Compra de producto ID 1 - Cantidad: 1', 1, 1),
+(2, '2025-07-13 22:14:28', 'Compra de producto ID 2 - Cantidad: 1', 1, 2);
+
 -- --------------------------------------------------------
 
 --
@@ -77,6 +85,14 @@ CREATE TABLE `pedidos` (
   `fk_id_producto` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Volcado de datos para la tabla `pedidos`
+--
+
+INSERT INTO `pedidos` (`id_pedido`, `cant_pedido`, `fecha_pedido`, `fk_id_producto`) VALUES
+(1, 1, '2025-07-13 22:14:28', 1),
+(2, 1, '2025-07-13 22:14:28', 2);
+
 -- --------------------------------------------------------
 
 --
@@ -85,11 +101,27 @@ CREATE TABLE `pedidos` (
 
 CREATE TABLE `producto` (
   `id_producto` int(11) NOT NULL,
+  `nombre_producto` varchar(250) NOT NULL,
+  `precio` float NOT NULL,
   `estado` int(11) NOT NULL,
   `cod_producto` varchar(20) NOT NULL,
   `stock_minimo` int(11) NOT NULL,
-  `stock` int(11) NOT NULL
+  `stock` int(11) NOT NULL,
+  `foto` varchar(250) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `producto`
+--
+
+INSERT INTO `producto` (`id_producto`, `nombre_producto`, `precio`, `estado`, `cod_producto`, `stock_minimo`, `stock`, `foto`) VALUES
+(1, 'Producto 1', 15000, 1, 'prod_001', 10, 14, 'productos/01.jpg'),
+(2, 'Producto 2', 10000, 1, 'prod_002', 10, 14, 'productos/02.jpg'),
+(3, 'Producto 3', 13000, 1, 'prod_003', 10, 15, 'productos/03.jpg'),
+(4, 'Producto 4', 16000, 1, 'prod_004', 10, 15, 'productos/04.jpg'),
+(5, 'Producto 5', 17000, 0, 'prod_005', 10, 0, 'productos/05.jpg'),
+(6, 'Producto Mayorista', 9000, 1, 'prod_006', 15, 18, 'mayorista/01.jpg'),
+(7, 'Promo 1', 20000, 1, 'prod_007', 6, 8, 'promos/01.jpg');
 
 -- --------------------------------------------------------
 
@@ -210,7 +242,7 @@ ALTER TABLE `empleado`
 -- AUTO_INCREMENT de la tabla `facturacion`
 --
 ALTER TABLE `facturacion`
-  MODIFY `id_facturacion` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_facturacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `materia_prima`
@@ -222,13 +254,13 @@ ALTER TABLE `materia_prima`
 -- AUTO_INCREMENT de la tabla `pedidos`
 --
 ALTER TABLE `pedidos`
-  MODIFY `id_pedido` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `producto`
 --
 ALTER TABLE `producto`
-  MODIFY `id_producto` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_producto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `proveedor`
